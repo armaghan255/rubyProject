@@ -1,0 +1,26 @@
+
+<h1>Posts#new</h1>
+<% if @post.errors.any?%>
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= bootstrap_form_with url:'upload' ,multipart:true do |f|%>
+  <%= file_field_tag 'picture'%>
+<%end%>
+<div class="container">
+<%= bootstrap_form_with model: @post, url:posts_path,multipart: true do |f|  %>
+<%= f.file_field :picture %>
+<div class="field-dark">
+
+<%= f.text_area :title %><br>
+</div>
+<%= f.text_area :description %><br>
+
+<%= f.check_box :has_attachment %><br>
+
+<%= f.submit %>
+<%end%>
+</div>
